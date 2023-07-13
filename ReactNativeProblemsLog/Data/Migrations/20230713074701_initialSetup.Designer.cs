@@ -12,7 +12,7 @@ using ReactNativeProblemsLog.Data;
 namespace ReactNativeProblemsLog.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230711165145_initialSetup")]
+    [Migration("20230713074701_initialSetup")]
     partial class initialSetup
     {
         /// <inheritdoc />
@@ -236,14 +236,16 @@ namespace ReactNativeProblemsLog.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("LastModified")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Solution")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Url")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
